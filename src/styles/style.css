@@ -54,9 +54,32 @@ h1 {
   text-align: center;
 }
 
+#roulette-wheel-wrapper {
+  position: relative;
+  width: fit-content;
+  margin: 1rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#roulette-pin {
+  position: absolute;
+  top: -22px;
+  left: 50%;
+  transform: translateX(-50%) rotate(180deg);
+  width: 0;
+  height: 0;
+  border-left: 18px solid transparent;
+  border-right: 18px solid transparent;
+  border-bottom: 28px solid #dc3545;
+  z-index: 10;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.13));
+}
+
 #roulette-wheel {
   position: relative;
-  margin: 1rem auto;
   background: #f0f0f0;
   border-radius: 50%;
   box-shadow: 0 2px 12px rgba(0,0,0,0.10);
@@ -240,6 +263,17 @@ h1 {
   }
   h1 {
     font-size: 1.3rem;
+  }
+  #roulette-wheel-wrapper {
+    width: 100vw;
+    max-width: 99vw;
+  }
+  #roulette-pin {
+    border-left: 11px solid transparent;
+    border-right: 11px solid transparent;
+    border-bottom: 18px solid #dc3545;
+    top: -13px;
+    transform: translateX(-50%) rotate(180deg);
   }
   #roulette-wheel {
     width: 90vw;

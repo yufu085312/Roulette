@@ -136,53 +136,64 @@ $(document).ready(function () {
         redrawAll();
     });
 
-    // 「回す」ボタンのクリックイベント
+    // ボタンの状態管理用
+    let isSpinning = false;
+    let isResultShown = false;
+    let lastRotation = 0;
+
     spinButton.on('click', function () {
-        if ($(this).prop('disabled')) return; // ボタンが無効な場合は処理しない
+        if (isSpinning) return;
 
-        if (items.length === 0) {
-            alert('項目を追加してください。');
-            return;
+        if (!isResultShown) {
+            // スピン処理
+            if (items.length === 0) {
+                alert('項目を追加してください。');
+                return;
+            }
+            isSpinning = true;
+            $(this).prop('disabled', true);
+            resultDisplay.text('');
+
+            const totalItems = items.length;
+            const anglePerItem = 360 / totalItems;
+            const randomIndex = Math.floor(Math.random() * totalItems);
+            const selectedItem = items[randomIndex];
+            const stopAngle = anglePerItem * (totalItems - 1 - randomIndex) + anglePerItem / 2;
+            const currentRotation = wheelContent.css('transform');
+            let currentAngle = 0;
+            if (currentRotation && currentRotation !== 'none') {
+                const values = currentRotation.split('(')[1].split(')')[0].split(',');
+                const a = parseFloat(values[0]);
+                const b = parseFloat(values[1]);
+                currentAngle = Math.round(Math.atan2(b, a) * (180/Math.PI));
+            }
+            const totalRotation = 360 * 5 + stopAngle;
+            const newRotation = currentAngle + totalRotation;
+            lastRotation = newRotation;
+
+            wheelContent.css({
+                'transition': 'transform 4s cubic-bezier(0.23, 1, 0.32, 1)',
+                'transform': `rotate(${newRotation}deg)`
+            });
+
+            setTimeout(() => {
+                resultDisplay.text(`結果：${selectedItem}`);
+                spinButton.prop('disabled', false);
+                spinButton.text('リセット');
+                isSpinning = false;
+                isResultShown = true;
+            }, 4000);
+        } else {
+            // リセット処理
+            wheelContent.css({
+                'transition': 'none',
+                'transform': 'rotate(0deg)'
+            });
+            resultDisplay.text('');
+            spinButton.text('回す');
+            isResultShown = false;
+            lastRotation = 0;
         }
-
-        // ボタンを無効化して多重クリックを防止
-        $(this).prop('disabled', true);
-        resultDisplay.text(''); // 結果をクリア
-
-        const totalItems = items.length;
-        const anglePerItem = 360 / totalItems;
-        // ランダムに停止位置を決定
-        const randomIndex = Math.floor(Math.random() * totalItems);
-        const selectedItem = items[randomIndex];
-
-        // 停止位置の角度を計算（各セグメントの中央に矢印が来るように調整）
-        const stopAngle = anglePerItem * (totalItems - 1 - randomIndex) + anglePerItem / 2;
-
-        // 余分な回転（最低5周）+ 停止位置までの回転
-        const totalRotation = 360 * 5 + stopAngle;
-
-        // 現在の回転角度を取得
-        const currentRotation = wheelContent.css('transform');
-        // matrix(...) 形式の場合、回転角度を取得
-        let currentAngle = 0;
-        if (currentRotation && currentRotation !== 'none') {
-            const values = currentRotation.split('(')[1].split(')')[0].split(',');
-            const a = parseFloat(values[0]);
-            const b = parseFloat(values[1]);
-            currentAngle = Math.round(Math.atan2(b, a) * (180/Math.PI));
-        }
-        const newRotation = currentAngle + totalRotation;
-
-        wheelContent.css({
-            'transition': 'transform 4s cubic-bezier(0.23, 1, 0.32, 1)',
-            'transform': `rotate(${newRotation}deg)`
-        });
-
-        // 回転アニメーションが終わった後に結果を表示
-        setTimeout(() => {
-            resultDisplay.text(`結果：${selectedItem}`);
-            spinButton.prop('disabled', false); // ボタンを再度有効化
-        }, 4000); // 4秒はtransitionの時間と合わせる
     });
 
     // --- 初期化処理 ---
