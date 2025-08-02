@@ -1,5 +1,6 @@
 $(document).ready(function () {
     const rouletteWheel = $('#roulette-wheel');
+    const wheelContent = $('#wheel-content');
     const spinButton = $('#spin-button');
     const resultDisplay = $('#result');
     const itemInput = $('#item-input');
@@ -14,8 +15,8 @@ $(document).ready(function () {
      */
     function renderWheel(currentItems) {
         const totalItems = currentItems.length;
-        rouletteWheel.empty(); // 既存のラベルをクリア
-        rouletteWheel.css('transform', 'rotate(0deg)'); // 回転をリセット
+        wheelContent.empty(); // 既存のラベルをクリア
+        wheelContent.css('transform', 'rotate(0deg)'); // 回転をリセット
 
         if (totalItems === 0) {
             rouletteWheel.css('background', '#f0f0f0'); // 項目がない場合は単色表示
@@ -48,16 +49,17 @@ $(document).ready(function () {
 
             // CSSを設定して配置と回転を行う
             label.css({
-                'left': `calc(50% + ${y}px)`, // xとyを入れ替えて開始位置を調整
+                'left': `calc(50% + ${y}px)`,
                 'top': `calc(50% - ${x}px)`,
-                'transform': `translate(-50%, -50%) rotate(${middleAngle}deg)`
+                'transform': `translate(-50%, -50%) rotate(${middleAngle}deg) rotate(-${middleAngle}deg)`
             });
-            rouletteWheel.append(label);
+            wheelContent.append(label);
         });
 
         // conic-gradientでルーレットの背景を作成
         const gradient = `conic-gradient(${gradientSegments.join(', ')})`;
-        rouletteWheel.css('background', gradient);
+        wheelContent.css('background', gradient);
+        rouletteWheel.css('background', '#f0f0f0'); // 外枠は単色
     }
 
     /**
@@ -160,13 +162,19 @@ $(document).ready(function () {
         const totalRotation = 360 * 5 + stopAngle;
 
         // 現在の回転角度を取得
-        const currentRotation = rouletteWheel.css('transform').split(/[()]/)[1];
-        const currentAngle = currentRotation ? parseFloat(currentRotation.split(',')[5]) : 0;
+        const currentRotation = wheelContent.css('transform');
+        // matrix(...) 形式の場合、回転角度を取得
+        let currentAngle = 0;
+        if (currentRotation && currentRotation !== 'none') {
+            const values = currentRotation.split('(')[1].split(')')[0].split(',');
+            const a = parseFloat(values[0]);
+            const b = parseFloat(values[1]);
+            currentAngle = Math.round(Math.atan2(b, a) * (180/Math.PI));
+        }
         const newRotation = currentAngle + totalRotation;
 
-
-        rouletteWheel.css({
-            'transition': 'transform 4s ease-out',
+        wheelContent.css({
+            'transition': 'transform 4s cubic-bezier(0.23, 1, 0.32, 1)',
             'transform': `rotate(${newRotation}deg)`
         });
 
@@ -179,4 +187,9 @@ $(document).ready(function () {
 
     // --- 初期化処理 ---
     redrawAll();
+
+    // ウィンドウリサイズ時はラベルのみ再描画（レスポンシブ対応）
+    $(window).on('resize', function() {
+        renderWheel(items);
+    });
 });
