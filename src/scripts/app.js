@@ -1,0 +1,182 @@
+$(document).ready(function () {
+    const rouletteWheel = $('#roulette-wheel');
+    const spinButton = $('#spin-button');
+    const resultDisplay = $('#result');
+    const itemInput = $('#item-input');
+    const addItemButton = $('#add-item-button');
+
+    // 初期データ。空にしてユーザー入力のみにすることも可能
+    let items = ['項目1', '項目2'];
+
+    /**
+     * ルーレットの盤面と項目ラベルを描画する関数
+     * @param {string[]} currentItems - ルーレットに表示する項目の配列
+     */
+    function renderWheel(currentItems) {
+        const totalItems = currentItems.length;
+        rouletteWheel.empty(); // 既存のラベルをクリア
+        rouletteWheel.css('transform', 'rotate(0deg)'); // 回転をリセット
+
+        if (totalItems === 0) {
+            rouletteWheel.css('background', '#f0f0f0'); // 項目がない場合は単色表示
+            return;
+        }
+
+        let gradientSegments = [];
+        const anglePerItem = 360 / totalItems;
+        const radius = rouletteWheel.width() / 2;
+
+        // 使用する色のリスト
+        const colors = ['#dc3545', '#007bff', '#28a745', '#ffc107', '#17a2b8', '#6f42c1'];
+        
+        currentItems.forEach((item, index) => {
+            const start = index * anglePerItem;
+            const end = (index + 1) * anglePerItem;
+            const middleAngle = start + anglePerItem / 2;
+
+            // 色を順番に適用
+            const color = colors[index % colors.length];
+            gradientSegments.push(`${color} ${start}deg ${end}deg`);
+
+            // 項目名を配置するラベル要素を作成
+            const label = $('<div class="item-label"></div>').text(item);
+
+            // ラベルの位置を三角関数で計算 (半径の60%の位置に配置)
+            const labelRadius = radius * 0.6;
+            const x = labelRadius * Math.cos(middleAngle * Math.PI / 180);
+            const y = labelRadius * Math.sin(middleAngle * Math.PI / 180);
+
+            // CSSを設定して配置と回転を行う
+            label.css({
+                'left': `calc(50% + ${y}px)`, // xとyを入れ替えて開始位置を調整
+                'top': `calc(50% - ${x}px)`,
+                'transform': `translate(-50%, -50%) rotate(${middleAngle}deg)`
+            });
+            rouletteWheel.append(label);
+        });
+
+        // conic-gradientでルーレットの背景を作成
+        const gradient = `conic-gradient(${gradientSegments.join(', ')})`;
+        rouletteWheel.css('background', gradient);
+    }
+
+    /**
+     * 入力項目リストを更新する関数
+     * @param {string[]} currentItems - 表示する項目の配列
+     */
+    function updateItemList(items) {
+        const itemList = $('#item-list');
+        itemList.empty();
+        items.forEach((item, index) => {
+            const listItem = $('<li></li>');
+            const itemText = $('<span></span>').text(item);
+            const editButton = $('<button>編集</button>').on('click', function () {
+                const inputField = $('<input type="text" />').val(item);
+                const saveButton = $('<button>保存</button>').on('click', function () {
+                    const newItem = inputField.val().trim();
+                    if (newItem) {
+                        items[index] = newItem;
+                        renderWheel(items);
+                        updateItemList(items);
+                    }
+                });
+                listItem.empty().append(inputField).append(saveButton);
+            });
+            const deleteButton = $('<button>削除</button>').on('click', function () {
+                items.splice(index, 1);
+                renderWheel(items);
+                updateItemList(items);
+            });
+            listItem.append(itemText).append(editButton).append(deleteButton);
+            itemList.append(listItem);
+        });
+    }
+
+    /**
+     * 全体の再描画を行う関数
+     */
+    function redrawAll() {
+        renderWheel(items);
+        updateItemList(items);
+    }
+
+    // --- イベントハンドラ ---
+
+    // 「追加」ボタンのクリックイベント
+    addItemButton.on('click', function () {
+        const newItem = itemInput.val().trim();
+        if (newItem) {
+            items.push(newItem);
+            itemInput.val('');
+            redrawAll();
+            // alert(`項目「${newItem}」が追加されました！`);
+        } else {
+            alert('項目を入力してください。');
+        }
+    });
+
+    // 「項目を入力」フィールドでEnterキーを押した時のイベント
+    itemInput.on('keypress', function(e) {
+        if (e.which === 13) { // Enterキーのキーコードは13
+            addItemButton.click(); // 追加ボタンのクリックイベントを発火
+        }
+    });
+
+
+    // 「削除」ボタンのクリックイベント (イベント委譲)
+    $('#item-list').on('click', '.delete-item-button', function() {
+        if (items.length <= 2) {
+            alert('項目は2つ以上必要です。');
+            return;
+        }
+        const indexToDelete = $(this).data('index');
+        items.splice(indexToDelete, 1); // 配列から項目を削除
+        redrawAll();
+    });
+
+    // 「回す」ボタンのクリックイベント
+    spinButton.on('click', function () {
+        if ($(this).prop('disabled')) return; // ボタンが無効な場合は処理しない
+
+        if (items.length === 0) {
+            alert('項目を追加してください。');
+            return;
+        }
+
+        // ボタンを無効化して多重クリックを防止
+        $(this).prop('disabled', true);
+        resultDisplay.text(''); // 結果をクリア
+
+        const totalItems = items.length;
+        const anglePerItem = 360 / totalItems;
+        // ランダムに停止位置を決定
+        const randomIndex = Math.floor(Math.random() * totalItems);
+        const selectedItem = items[randomIndex];
+
+        // 停止位置の角度を計算（各セグメントの中央に矢印が来るように調整）
+        const stopAngle = anglePerItem * (totalItems - 1 - randomIndex) + anglePerItem / 2;
+
+        // 余分な回転（最低5周）+ 停止位置までの回転
+        const totalRotation = 360 * 5 + stopAngle;
+
+        // 現在の回転角度を取得
+        const currentRotation = rouletteWheel.css('transform').split(/[()]/)[1];
+        const currentAngle = currentRotation ? parseFloat(currentRotation.split(',')[5]) : 0;
+        const newRotation = currentAngle + totalRotation;
+
+
+        rouletteWheel.css({
+            'transition': 'transform 4s ease-out',
+            'transform': `rotate(${newRotation}deg)`
+        });
+
+        // 回転アニメーションが終わった後に結果を表示
+        setTimeout(() => {
+            resultDisplay.text(`結果：${selectedItem}`);
+            spinButton.prop('disabled', false); // ボタンを再度有効化
+        }, 4000); // 4秒はtransitionの時間と合わせる
+    });
+
+    // --- 初期化処理 ---
+    redrawAll();
+});

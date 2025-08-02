@@ -1,0 +1,168 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #f3f4f6, #e2e8f0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  color: #333;
+}
+
+#roulette-container {
+  text-align: center;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#roulette-wheel {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  border: 5px solid #333;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  margin: 20px auto;
+  position: relative;
+  background: conic-gradient(#ff6b6b, #feca57, #1dd1a1, #5f27cd, #54a0ff, #ff9ff3);
+}
+
+#roulette-wheel .item-label {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform-origin: bottom center;
+  font-size: 14px;
+  font-weight: bold;
+  pointer-events: none;
+  white-space: nowrap;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+#spin-button {
+  background: #1dd1a1;
+  color: #fff;
+}
+
+#spin-button:hover {
+  background: #10ac84;
+}
+
+#add-item-button {
+  background: #54a0ff;
+  color: #fff;
+}
+
+#add-item-button:hover {
+  background: #2e86de;
+}
+
+#input-container {
+  margin-top: 10px;
+}
+
+#item-input {
+  padding: 8px;
+  font-size: 14px;
+  width: 180px;
+}
+
+#item-list-container {
+  margin-top: 20px;
+  max-height: 200px; /* 高さを制限 */
+  overflow-y: auto; /* 縦スクロールを有効化 */
+  border: 1px solid #ccc; /* 視覚的な区切り */
+  padding: 10px;
+  border-radius: 5px;
+  background: #ffffff;
+}
+
+#item-list li {
+  list-style: none;
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background: #f1f2f6;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#item-list li button {
+  background: #ff6b6b;
+  color: #fff;
+  margin-left: 10px;
+}
+
+#item-list li button:hover {
+  background: #ee5253;
+}
+
+#result {
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  #roulette-container {
+    width: 90%;
+    padding: 15px;
+  }
+
+  #roulette-wheel {
+    width: 200px;
+    height: 200px;
+  }
+
+  button {
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+
+  #item-list-container {
+    max-height: 150px;
+  }
+
+  #item-input {
+    width: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  #roulette-wheel {
+    width: 150px;
+    height: 150px;
+  }
+
+  button {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+
+  #item-input {
+    width: 120px;
+  }
+
+  #item-list li {
+    font-size: 12px;
+    padding: 8px;
+  }
+}

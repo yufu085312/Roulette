@@ -1,0 +1,14 @@
+{
+  "name": "roulette-app",
+  "version": "1.0.0",
+  "description": "A simple roulette application using jQuery.",
+  "main": "src/scripts/app.js",
+  "scripts": {
+    "start": "live-server src"
+  },
+  "dependencies": {
+    "jquery": "^3.6.0"
+  },
+  "author": "",
+  "license": "ISC"
+}
