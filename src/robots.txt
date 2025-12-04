@@ -1,0 +1,7 @@
+# robots.txt for Roulette App
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://roulette.yu-fu.site/sitemap.xml

@@ -2,39 +2,93 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>ルーレットアプリ | 簡単ランダム選択ツール</title>
+  <meta name="description" content="簡単に使えるルーレットアプリ。複数の選択肢から一つをランダムに選択できます。決断に迷った時や抽選、ゲームなどに最適なツールです。" />
+  <meta name="keywords" content="ルーレット, 抽選, ランダム選択, 決断ツール, くじ引き, 抽選アプリ" />
+  <meta name="author" content="Roulette App" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://roulette.yu-fu.site/"/>
+  
+  <!-- Open Graph Tags -->
+  <meta property="og:title" content="ルーレットアプリ | 簡単ランダム選択ツール" />
+  <meta property="og:description" content="簡単に使えるルーレットアプリ。複数の選択肢から一つをランダムに選択できます。決断に迷った時や抽選、ゲームなどに最適なツールです。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://roulette.yu-fu.site/"/>
+  <meta property="og:image" content="https://roulette.yu-fu.site/ogp-image.png"/>
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="ja_JP" />
+  <meta property="og:site_name" content="ルーレットアプリ" />
+  
+  <!-- Twitter Card Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ルーレットアプリ | 簡単ランダム選択ツール" />
+  <meta name="twitter:description" content="簡単に使えるルーレットアプリ。複数の選択肢から一つをランダムに選択できます。" />
+  <meta name="twitter:image" content="https://roulette.yu-fu.site/ogp-image.png"/>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="apple-touch-icon" href="ogp-image.png" />
+  
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#4285f4" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-T82C963BWM"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
       gtag('config', 'G-T82C963BWM');
+    </script>
+  
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "ルーレットアプリ",
+      "description": "簡単に使えるルーレットアプリ。複数の選択肢から一つをランダムに選択できます。",
+      "url": "https://roulette.yu-fu.site/",
+      "applicationCategory": "UtilityApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "JPY"
+      },
+      "inLanguage": "ja"
+    }
   </script>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ルーレットアプリ</title>
+  
   <link rel="stylesheet" href="styles/style.css" />
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="scripts/app.js" defer></script>
 </head>
 <body>
-  <div id="roulette-container">
-    <h1>ルーレット</h1>
-    <div id="roulette-wheel-wrapper">
-      <div id="roulette-pin"></div>
-      <div id="roulette-wheel">
-        <div id="wheel-content"></div>
+  <main>
+    <div id="roulette-container">
+      <header>
+        <h1>ルーレット</h1>
+      </header>
+      <div id="roulette-wheel-wrapper">
+        <div id="roulette-pin"></div>
+        <div id="roulette-wheel">
+          <div id="wheel-content"></div>
+        </div>
       </div>
-    </div>
-    <button id="spin-button">回す</button>
-    <div id="result"></div>
-    <div id="input-container">
-      <input type="text" id="item-input" placeholder="項目を入力"/>
-      <button id="add-item-button">追加</button>
-    </div>
-    <div id="item-list-container">
-      <ul id="item-list"></ul>
-    </div>
-  </div>
+      <button id="spin-button">回す</button>
+      <div id="result"></div>
+      <div id="input-container">
+        <input type="text" id="item-input" placeholder="項目を入力" />
+        <button id="add-item-button">追加</button>
+      </div>
+      <div id="item-list-container">
+        <ul id="item-list"></ul>
+      </div>
+      </div>
+  </main>
 </body>
 </html>
