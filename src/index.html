@@ -63,32 +63,46 @@
     }
   </script>
   
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=M+PLUS+Rounded+1c:wght@400;500;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="styles/style.css" />
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="scripts/app.js" defer></script>
 </head>
 <body>
   <main>
-    <div id="roulette-container">
+    <div class="glass-background">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+    </div>
+    
+    <div id="roulette-container" class="glass-card">
       <header>
-        <h1>ルーレット</h1>
+        <h1><i class="fa-solid fa-gamepad"></i> Roulette</h1>
       </header>
       <div id="roulette-wheel-wrapper">
-        <div id="roulette-pin"></div>
+        <div id="roulette-pin"><i class="fa-solid fa-location-dot"></i></div>
         <div id="roulette-wheel">
           <div id="wheel-content"></div>
         </div>
       </div>
-      <button id="spin-button">回す</button>
+      <button id="spin-button" class="btn-primary"><i class="fa-solid fa-play"></i> START</button>
       <div id="result"></div>
-      <div id="input-container">
-        <input type="text" id="item-input" placeholder="項目を入力" />
-        <button id="add-item-button">追加</button>
+      <div class="controls-section">
+        <div id="input-container">
+          <input type="text" id="item-input" placeholder="新しい項目を入力..." />
+          <button id="add-item-button" class="btn-icon"><i class="fa-solid fa-plus"></i></button>
+          </div>
+          <div id="item-list-container">
+            <ul id="item-list"></ul>
+        </div>
       </div>
-      <div id="item-list-container">
-        <ul id="item-list"></ul>
-      </div>
-      </div>
+    </div>
   </main>
 </body>
 </html>
