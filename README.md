@@ -1,42 +1,71 @@
-# Roulette App
+# 🎯 ルーレットアプリ (Roulette App)
 
-This is a simple roulette application built using jQuery. The app allows users to spin a virtual roulette wheel and displays the result.
+シンプルで美しいデザインのWebベースのルーレットアプリです。
+「今日のランチは何にする？」「誰が掃除当番？」といった日常の些細な決断から、パーティーでの抽選まで幅広く活用できます。
 
-## Project Structure
+![OGP Image](src/ogp-image.png)
+
+## ✨ 特徴
+
+*   **🎨 モダンなデザイン**: グラスモーフィズム（すりガラス風）を取り入れた、洗練されたUI。
+*   **📱 完全レスポンシブ**: スマートフォンからPCまで、どのデバイスでも快適に動作します。
+*   **🛠 自由なカスタマイズ**: ルーレットの項目は自由に追加・編集・削除が可能。
+*   **🇯🇵 日本語対応**: インターフェースからドキュメントまで、完全日本語対応です。
+*   **📖 解説ページ付き**: アプリの使い方や特徴をまとめた[詳細ページ](src/article.html)を内包。
+
+## 🚀 インストールと実行方法
+
+このプロジェクトはNode.js環境で動作します。
+
+### 1. リポジトリのクローン
+```bash
+git clone https://github.com/yufu085312/Roulette.git
+cd Roulette
+```
+
+### 2. 依存関係のインストール
+```bash
+npm install
+```
+
+### 3. アプリの起動
+開発用サーバーを起動してアプリを確認します。
+```bash
+npm run start
+```
+ブラウザが自動的に開き、`http://127.0.0.1:8080` (または利用可能なポート) でアプリが表示されます。
+
+## 📂 ディレクトリ構成
 
 ```
-roulette-app
-├── src
-│   ├── index.html        # Entry point of the application
-│   ├── styles
-│   │   └── style.css     # Styles for the roulette design and layout
-│   └── scripts
-│       └── app.js        # Main logic of the application using jQuery
-├── package.json          # npm configuration file
-└── README.md             # Documentation for the project
+Roulette/
+├── src/
+│   ├── index.html        # アプリのメイン画面
+│   ├── article.html      # アプリの解説・記事ページ
+│   ├── styles/
+│   │   └── style.css     # スタイルシート (CSS)
+│   ├── scripts/
+│   │   └── app.js        # アプリケーションロジック (jQuery)
+│   ├── ogp-image.png     # OGP用画像
+│   └── ...
+├── package.json          # プロジェクト設定・依存関係
+└── README.md             # プロジェクトドキュメント
 ```
 
-## Installation
+## 🛠 技術スタック
 
-1. Clone the repository:
-   ```
-   git clone https://github.com/yourusername/roulette-app.git
-   ```
-2. Navigate to the project directory:
-   ```
-   cd roulette-app
-   ```
-3. Install the dependencies:
-   ```
-   npm install
-   ```
+*   **HTML5**: セマンティックなマークアップ (`main`, `header`, `section` など)。
+*   **CSS3**: Flexbox/Grid、アニメーション、カスタムプロパティ、グラスモーフィズムエフェクト。
+*   **JavaScript (jQuery)**: DOM操作、ルーレットのアニメーション制御。
+*   **Google Fonts**: Inter, M PLUS Rounded 1c, Noto Sans JP。
+*   **Font Awesome**: アイコンフォント。
 
-## Usage
+## 📝 使い方
 
-1. Open `src/index.html` in your web browser.
-2. Click the "Spin" button to spin the roulette wheel.
-3. The result will be displayed on the screen.
+1.  **項目の追加**: テキストボックスに入力し、`+`ボタンを押すとリストに追加されます。
+2.  **項目の編集/削除**: リスト内の鉛筆アイコンで編集、ゴミ箱アイコンで削除ができます。
+3.  **スタート**: `START`ボタンを押すとルーレットが回転し、ランダムに項目が選ばれます。
 
-## Contributing
+## 📄 ライセンス
 
-Feel free to submit issues or pull requests if you have suggestions or improvements for the project.
+[ISC License](LICENSE)
