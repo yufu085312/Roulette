@@ -89,24 +89,19 @@ body {
 
 /* Glass Card Container */
 .glass-card {
-  background: var(--glass-bg);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--glass-shadow);
-  border-radius: 24px;
-  padding: 2rem 3rem;
-  width: 90%;
-  max-width: 500px;
-  margin: 0 auto;
+  border-radius: 0;
+  padding: 2rem;
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+  margin: 0;
   /* Center within main */
   display: flex;
   flex-direction: column;
   align-items: center;
     /* Center children horizontally */
-  justify-content: flex-start;
-  max-height: 90vh;
-    overflow-y: auto;
+  justify-content: center;
+  overflow-y: auto;
     scrollbar-width: thin;
   }
   
@@ -148,8 +143,8 @@ h1 {
 }
 
 #roulette-wheel {
-  width: 300px;
-    height: 300px;
+  width: 90vw;
+    max-width: 50vh;
     border-radius: 50%;
     border: 8px solid rgba(255, 255, 255, 0.8);
   position: relative;
@@ -374,13 +369,14 @@ h1 {
 /* Mobile Responsive */
 @media (max-width: 600px) {
   .glass-card {
-      padding: 1.5rem;
-      width: 95%;
-      border-radius: 20px;
+      padding: 1rem;
+      width: 100%;
+      border-radius: 0;
   }
 
   #roulette-wheel {
-    width: 260px;
+    width: 95vw;
+    max-width: none;
     height: auto;
     /* Allow aspect-ratio to define height */
       aspect-ratio: 1;
