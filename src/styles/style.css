@@ -96,10 +96,10 @@ main {
 
 /* Glass Card Container */
 .glass-card {
-  border-radius: 24px; /* Add some roundness for PC */
+  border-radius: 24px;
   padding: 3rem 2rem;
   width: 95%;
-  max-width: 600px; /* Constrain width on PC */
+  max-width: 900px; /* Expanded for 2 columns */
   margin: 2rem auto;
   min-height: auto;
   /* Center within main */
@@ -151,8 +151,10 @@ h1 {
 
 #roulette-wheel {
   width: 90vw;
-    max-width: 50vh;
-    border-radius: 50%;
+  max-width: 50vh;
+  /* Ensure wheel doesn't exceed screen width even on tall tablets */
+  max-width: min(50vh, 450px);
+  border-radius: 50%;
     border: 8px solid rgba(255, 255, 255, 0.8);
   position: relative;
   overflow: hidden;
@@ -257,15 +259,30 @@ h1 {
     }
   }
   
-  /* Controls */
-  .controls-section {
-    width: 100%;
-    margin-top: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.3);
-    padding-top: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  /* App Layout */
+.app-main-layout {
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.roulette-section {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.controls-section {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #input-container {
@@ -374,10 +391,27 @@ h1 {
   margin-right: 8px;
 }
 
-/* Mobile Responsive */
+/* Tablet and Mobile Responsive (Vertical layout below 1100px) */
+@media (max-width: 1100px) {
+  .app-main-layout {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .controls-section {
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    padding-top: 2rem;
+    margin-top: 1rem;
+  }
+
+  .glass-card {
+    max-width: 600px;
+  }
+}
+
 @media (max-width: 600px) {
   .glass-card {
-      padding: 1rem;
+      padding: 1.5rem;
       width: 100%;
       max-width: 100%;
       border-radius: 0;

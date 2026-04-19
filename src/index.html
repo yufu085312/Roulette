@@ -83,23 +83,28 @@
     
     <div id="roulette-container" class="glass-card">
       <header>
-        <h1><i class="fa-solid fa-gamepad"></i> Roulette</h1>
+        <h1><i class="fa-solid fa-gamepad"></i> ルーレットアプリ</h1>
       </header>
-      <div id="roulette-wheel-wrapper">
-        <div id="roulette-pin"><i class="fa-solid fa-location-dot"></i></div>
-        <div id="roulette-wheel">
-          <div id="wheel-content"></div>
+      <div class="app-main-layout">
+        <div class="roulette-section">
+          <div id="roulette-wheel-wrapper">
+            <div id="roulette-pin"><i class="fa-solid fa-location-dot"></i></div>
+            <div id="roulette-wheel">
+              <div id="wheel-content"></div>
+            </div>
+          </div>
+          <button id="spin-button" class="btn-primary"><i class="fa-solid fa-play"></i> START</button>
+          <div id="result"></div>
         </div>
-      </div>
-      <button id="spin-button" class="btn-primary"><i class="fa-solid fa-play"></i> START</button>
-      <div id="result"></div>
-      <div class="controls-section">
-        <div id="input-container">
-          <input type="text" id="item-input" placeholder="新しい項目を入力..." />
-          <button id="add-item-button" class="btn-icon"><i class="fa-solid fa-plus"></i></button>
+
+        <div class="controls-section">
+          <div id="input-container">
+            <input type="text" id="item-input" placeholder="新しい項目を入力..." />
+            <button id="add-item-button" class="btn-icon"><i class="fa-solid fa-plus"></i></button>
           </div>
           <div id="item-list-container">
             <ul id="item-list"></ul>
+          </div>
         </div>
       </div>
       <nav class="footer-nav">
