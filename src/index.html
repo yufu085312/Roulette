@@ -30,8 +30,8 @@
   <meta name="twitter:image" content="https://roulette.yu-fu.site/ogp-image.png"/>
   
   <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="favicon.ico" />
-  <link rel="apple-touch-icon" href="ogp-image.png" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   
   <!-- Theme Color -->
   <meta name="theme-color" content="#4285f4" />
@@ -83,26 +83,37 @@
     
     <div id="roulette-container" class="glass-card">
       <header>
-        <h1><i class="fa-solid fa-gamepad"></i> Roulette</h1>
+        <h1><i class="fa-solid fa-gamepad"></i> ルーレットアプリ</h1>
       </header>
-      <div id="roulette-wheel-wrapper">
-        <div id="roulette-pin"><i class="fa-solid fa-location-dot"></i></div>
-        <div id="roulette-wheel">
-          <div id="wheel-content"></div>
+      <div class="app-main-layout">
+        <div class="roulette-section">
+          <div id="roulette-wheel-wrapper">
+            <div id="roulette-pin"><i class="fa-solid fa-location-dot"></i></div>
+            <div id="roulette-wheel">
+              <div id="wheel-content"></div>
+            </div>
+          </div>
+          <button id="spin-button" class="btn-primary"><i class="fa-solid fa-play"></i> START</button>
+          <div id="result"></div>
         </div>
-      </div>
-      <button id="spin-button" class="btn-primary"><i class="fa-solid fa-play"></i> START</button>
-      <div id="result"></div>
-      <div class="controls-section">
-        <div id="input-container">
-          <input type="text" id="item-input" placeholder="新しい項目を入力..." />
-          <button id="add-item-button" class="btn-icon"><i class="fa-solid fa-plus"></i></button>
+
+        <div class="controls-section">
+          <div id="input-container">
+            <input type="text" id="item-input" placeholder="新しい項目を入力..." />
+            <button id="add-item-button" class="btn-icon"><i class="fa-solid fa-plus"></i></button>
           </div>
           <div id="item-list-container">
             <ul id="item-list"></ul>
+          </div>
         </div>
       </div>
-      <a href="article.html" class="footer-link">アプリについて</a>
+      <nav class="footer-nav">
+        <a href="article.html" class="footer-link">アプリについて</a>
+        <a href="terms.html" class="footer-link">利用規約</a>
+        <a href="privacy.html" class="footer-link">ポリシー</a>
+        <a href="disclaimer.html" class="footer-link">免責事項</a>
+        <a href="contact.html" class="footer-link">お問い合わせ</a>
+      </nav>
     </div>
   </main>
 </body>

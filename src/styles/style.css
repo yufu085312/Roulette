@@ -19,13 +19,20 @@ body {
   margin: 0;
   padding: 0;
   font-family: var(--font-main);
-    background-color: #f0f2f5;
+  background-color: #f0f2f5;
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   overflow-x: hidden;
-    color: var(--text-main);
+  color: var(--text-main);
+}
+
+main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
 }
 
 /* Background Blobs */
@@ -89,12 +96,12 @@ body {
 
 /* Glass Card Container */
 .glass-card {
-  border-radius: 0;
-  padding: 2rem;
-  width: 100%;
-  max-width: 100%;
-  min-height: 100vh;
-  margin: 0;
+  border-radius: 24px;
+  padding: 3rem 2rem;
+  width: 95%;
+  max-width: 900px; /* Expanded for 2 columns */
+  margin: 2rem auto;
+  min-height: auto;
   /* Center within main */
   display: flex;
   flex-direction: column;
@@ -144,8 +151,10 @@ h1 {
 
 #roulette-wheel {
   width: 90vw;
-    max-width: 50vh;
-    border-radius: 50%;
+  max-width: 50vh;
+  /* Ensure wheel doesn't exceed screen width even on tall tablets */
+  max-width: min(50vh, 450px);
+  border-radius: 50%;
     border: 8px solid rgba(255, 255, 255, 0.8);
   position: relative;
   overflow: hidden;
@@ -195,6 +204,7 @@ h1 {
 /* Button Styling */
 #spin-button {
   width: 100%;
+  max-width: 400px; /* Prevent button from becoming too wide on PC */
     padding: 1rem;
     font-size: 1.2rem;
     font-weight: 700;
@@ -249,15 +259,30 @@ h1 {
     }
   }
   
-  /* Controls */
-  .controls-section {
-    width: 100%;
-    margin-top: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.3);
-    padding-top: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  /* App Layout */
+.app-main-layout {
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.roulette-section {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.controls-section {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #input-container {
@@ -366,12 +391,32 @@ h1 {
   margin-right: 8px;
 }
 
-/* Mobile Responsive */
+/* Tablet and Mobile Responsive (Vertical layout below 1100px) */
+@media (max-width: 1100px) {
+  .app-main-layout {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .controls-section {
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    padding-top: 2rem;
+    margin-top: 1rem;
+  }
+
+  .glass-card {
+    max-width: 600px;
+  }
+}
+
 @media (max-width: 600px) {
   .glass-card {
-      padding: 1rem;
+      padding: 1.5rem;
       width: 100%;
+      max-width: 100%;
       border-radius: 0;
+      margin: 0;
+      min-height: 100vh;
   }
 
   #roulette-wheel {
@@ -517,28 +562,121 @@ h1 {
   box-shadow: 0 6px 20px rgba(118, 75, 162, 0.6);
 }
 
-.footer-link {
+.footer-nav {
   margin-top: 2rem;
-  display: inline-block;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.footer-link {
   color: rgba(255, 255, 255, 0.8);
   text-decoration: none;
-  font-size: 0.9rem;
-  border-bottom: 1px dotted rgba(255, 255, 255, 0.8);
+  font-size: 0.85rem;
+  border-bottom: 1px dotted rgba(255, 255, 255, 0.5);
   transition: all 0.3s;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
 }
 
 .footer-link:hover {
   color: #fff;
   border-bottom-style: solid;
+  border-bottom-color: #fff;
+}
+
+.article-card {
+  max-width: 800px;
+  width: 95%;
+  min-height: auto;
+  margin: 2rem auto;
+  border-radius: 24px;
 }
 
 @media (max-width: 600px) {
   .article-card {
     padding: 1.5rem;
+    margin: 1rem auto;
+    width: 92%;
   }
 
   .feature-list {
     grid-template-columns: 1fr;
   }
+}
+
+/* Contact Form Styles */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text-main);
+  padding-left: 0.2rem;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.7);
+  font-size: 1rem;
+  font-family: inherit;
+  outline: none;
+  transition: all 0.3s;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.2);
+  border-color: rgba(118, 75, 162, 0.3);
+}
+
+.form-group textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.btn-submit {
+  border: none;
+  border-radius: 50px;
+  background: var(--primary-gradient);
+  color: white;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(118, 75, 162, 0.4);
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.btn-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(118, 75, 162, 0.6);
+}
+
+.btn-submit:active {
+  transform: translateY(0);
 }
