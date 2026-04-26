@@ -11,13 +11,13 @@ $(document).ready(function () {
 
     // A more premium, pastel/vibrant color palette
     const colors = [
-        '#FF9A9E', // Pink
-        '#FECFEF', // Light Pink
-        '#A18CD1', // Purple
-        '#FBC2EB', // Lavender
-        '#8FD3F4', // Light Blue
-        '#84FAB0', // Mint
-        '#E0C3FC'  // Light Violet
+        '#e67e22', // Carrot
+        '#3498db', // Peter River
+        '#2ecc71', // Nephritis
+        '#9b59b6', // Amethyst
+        '#f1c40f', // Sunflower
+        '#1abc9c', // Turquoise
+        '#e74c3c'  // Alizarin
     ];
 
     /**
