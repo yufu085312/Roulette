@@ -680,3 +680,102 @@ h1 {
 .btn-submit:active {
   transform: translateY(0);
 }
+
+/* SEO Info Section Styles */
+.seo-info-section {
+  width: 100%;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  text-align: left;
+}
+
+.seo-content h2 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  background: var(--primary-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  justify-content: flex-start;
+}
+
+.seo-content p {
+  color: var(--text-main);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.seo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.seo-item {
+  background: rgba(255, 255, 255, 0.4);
+  padding: 1.2rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.seo-item h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: #444;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.seo-item p {
+  font-size: 0.85rem;
+  margin-bottom: 0;
+  color: var(--text-light);
+}
+
+.seo-usage {
+  background: rgba(255, 255, 255, 0.3);
+  padding: 1.5rem;
+  border-radius: 16px;
+}
+
+.seo-usage h3 {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  color: #444;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.seo-usage ol {
+  padding-left: 1.5rem;
+  margin: 0;
+}
+
+.seo-usage li {
+  margin-bottom: 0.8rem;
+  font-size: 0.9rem;
+  color: var(--text-main);
+}
+
+.seo-usage li:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .seo-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .seo-content h2 {
+    font-size: 1.2rem;
+  }
+}
